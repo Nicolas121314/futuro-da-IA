@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Futuro da IA – Jornada Interativa</title>
+    <title>Futuro da IA · Neon Rose</title>
     <style>
-        /* ===== RESET & VARIÁVEIS ===== */
+        /* ===== RESET & VARIÁVEIS NEON ROSE ===== */
         * {
             margin: 0;
             padding: 0;
@@ -13,14 +13,16 @@
         }
 
         :root {
-            --cor-fundo: #01080E;
-            --cor-principal: #0B0D20;
-            --cor-secundaria: #212333;
-            --cor-destaque: #2BDEFD;
-            --cor-texto: #D7F9FF;
-            --cor-card: #141833;
-            --borda-glow: rgba(43, 222, 253, 0.2);
+            --cor-fundo: #0c0114;
+            --cor-principal: #1a0b1f;
+            --cor-secundaria: #3d1a3d;
+            --cor-destaque: #ff2d9e;
+            --cor-glow: #ff6bcb;
+            --cor-texto: #fce4f0;
+            --cor-card: #2d1229;
+            --borda-glow: rgba(255, 45, 158, 0.4);
             --fonte: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            --sombra-neon: 0 0 30px rgba(255, 45, 158, 0.25), 0 0 60px rgba(255, 45, 158, 0.08);
         }
 
         body {
@@ -32,48 +34,94 @@
             align-items: center;
             min-height: 100vh;
             padding: 1.5rem;
-            background-image: radial-gradient(circle at 20% 30%, rgba(43, 222, 253, 0.03) 0%, transparent 60%);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 45, 158, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(255, 107, 203, 0.06) 0%, transparent 50%),
+                repeating-linear-gradient(45deg, rgba(255, 45, 158, 0.02) 0px, rgba(255, 45, 158, 0.02) 2px, transparent 2px, transparent 8px);
         }
 
         /* ===== CARD PRINCIPAL ===== */
         .caixa-principal {
             background-color: var(--cor-principal);
             width: 100%;
-            max-width: 720px;
-            padding: 2rem 2rem 2.5rem;
-            border-radius: 2.5rem;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(43, 222, 253, 0.1);
-            backdrop-filter: blur(2px);
-            transition: all 0.3s ease;
-            border: 1px solid rgba(43, 222, 253, 0.08);
+            max-width: 760px;
+            padding: 2.2rem 2.2rem 2.8rem;
+            border-radius: 3rem;
+            box-shadow: 
+                0 0 40px rgba(255, 45, 158, 0.15),
+                0 0 80px rgba(255, 45, 158, 0.05),
+                inset 0 0 60px rgba(255, 45, 158, 0.03);
+            border: 1px solid rgba(255, 45, 158, 0.2);
+            backdrop-filter: blur(6px);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* fundo animado com bolhas neon */
+        .caixa-principal::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 40%, rgba(255, 45, 158, 0.04) 0%, transparent 60%),
+                        radial-gradient(circle at 70% 80%, rgba(255, 107, 203, 0.03) 0%, transparent 50%);
+            animation: fundoBrilho 12s infinite alternate ease-in-out;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes fundoBrilho {
+            0% { transform: translate(0, 0) scale(1); opacity: 0.6; }
+            100% { transform: translate(10%, 5%) scale(1.1); opacity: 1; }
+        }
+
+        .caixa-principal > * {
+            position: relative;
+            z-index: 1;
         }
 
         .caixa-principal:hover {
-            border-color: rgba(43, 222, 253, 0.2);
-            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(43, 222, 253, 0.15);
+            border-color: rgba(255, 45, 158, 0.45);
+            box-shadow: 
+                0 0 60px rgba(255, 45, 158, 0.2),
+                0 0 120px rgba(255, 45, 158, 0.08),
+                inset 0 0 80px rgba(255, 45, 158, 0.04);
         }
 
         /* ===== TÍTULO ===== */
         h1 {
             color: var(--cor-destaque);
-            font-size: 2.2rem;
+            font-size: 2.4rem;
             font-weight: 700;
             letter-spacing: -0.02em;
-            margin-bottom: 0.5rem;
-            text-shadow: 0 0 30px rgba(43, 222, 253, 0.15);
+            margin-bottom: 0.2rem;
+            text-shadow: 
+                0 0 30px rgba(255, 45, 158, 0.5),
+                0 0 60px rgba(255, 45, 158, 0.2),
+                0 0 100px rgba(255, 45, 158, 0.1);
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 0.6rem;
             flex-wrap: wrap;
+            animation: tituloPulse 3s infinite alternate ease-in-out;
+        }
+
+        @keyframes tituloPulse {
+            0% { text-shadow: 0 0 30px rgba(255, 45, 158, 0.4), 0 0 60px rgba(255, 45, 158, 0.15); }
+            100% { text-shadow: 0 0 50px rgba(255, 45, 158, 0.8), 0 0 100px rgba(255, 45, 158, 0.3), 0 0 150px rgba(255, 45, 158, 0.1); }
         }
 
         h1 small {
             font-size: 1rem;
-            font-weight: 400;
-            color: var(--cor-texto);
-            opacity: 0.6;
-            letter-spacing: 0.3px;
+            font-weight: 300;
+            color: var(--cor-glow);
+            opacity: 0.7;
+            letter-spacing: 0.5px;
+            text-shadow: 0 0 20px rgba(255, 107, 203, 0.2);
         }
 
         .subtitulo {
@@ -81,257 +129,336 @@
             font-size: 0.95rem;
             opacity: 0.5;
             margin-bottom: 2rem;
-            border-bottom: 1px solid rgba(43, 222, 253, 0.08);
+            border-bottom: 1px solid rgba(255, 45, 158, 0.12);
             padding-bottom: 1rem;
-            letter-spacing: 0.3px;
+            letter-spacing: 0.8px;
+            color: var(--cor-glow);
         }
 
         /* ===== PERGUNTA ===== */
         .caixa-perguntas {
             background-color: var(--cor-card);
-            padding: 1.8rem 1.5rem;
-            border-radius: 1.8rem;
+            padding: 1.8rem 1.8rem;
+            border-radius: 2.2rem;
             margin-bottom: 2rem;
             font-size: 1.3rem;
             line-height: 1.6;
             font-weight: 500;
-            border: 1px solid rgba(43, 222, 253, 0.06);
-            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 45, 158, 0.15);
+            box-shadow: 
+                inset 0 0 30px rgba(255, 45, 158, 0.05),
+                0 0 20px rgba(255, 45, 158, 0.05);
             min-height: 100px;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            color: #f0fcff;
-            transition: all 0.25s ease;
+            color: #ffe6f2;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            animation: perguntaGlow 3s infinite alternate ease-in-out;
+        }
+
+        @keyframes perguntaGlow {
+            0% { border-color: rgba(255, 45, 158, 0.1); box-shadow: inset 0 0 20px rgba(255, 45, 158, 0.02), 0 0 15px rgba(255, 45, 158, 0.02); }
+            100% { border-color: rgba(255, 45, 158, 0.3); box-shadow: inset 0 0 40px rgba(255, 45, 158, 0.08), 0 0 40px rgba(255, 45, 158, 0.06); }
         }
 
         .caixa-perguntas::before {
-            content: "❓ ";
+            content: "✦ ";
             font-size: 1.6rem;
-            opacity: 0.4;
-            margin-right: 10px;
+            opacity: 0.5;
+            margin-right: 12px;
+            color: var(--cor-destaque);
+            animation: estrelaGirar 6s infinite linear;
+        }
+
+        @keyframes estrelaGirar {
+            0% { transform: rotate(0deg) scale(1); opacity: 0.5; }
+            50% { transform: rotate(180deg) scale(1.2); opacity: 0.9; }
+            100% { transform: rotate(360deg) scale(1); opacity: 0.5; }
         }
 
         /* ===== ALTERNATIVAS ===== */
         .caixa-alternativas {
             display: flex;
             flex-direction: column;
-            gap: 0.9rem;
+            gap: 1rem;
             margin: 1.8rem 0 2rem;
         }
 
         .caixa-alternativas button {
-            background-color: var(--cor-secundaria);
+            background: linear-gradient(145deg, var(--cor-secundaria), #2a1228);
             color: var(--cor-texto);
-            border: 1px solid rgba(43, 222, 253, 0.08);
-            border-radius: 1.2rem;
-            padding: 1.1rem 1.5rem;
+            border: 1px solid rgba(255, 45, 158, 0.15);
+            border-radius: 1.6rem;
+            padding: 1.2rem 1.8rem;
             font-size: 1.05rem;
             font-weight: 500;
             cursor: pointer;
-            transition: all 0.25s ease;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             text-align: left;
             display: flex;
             align-items: center;
-            gap: 0.8rem;
+            gap: 1rem;
             line-height: 1.4;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
             letter-spacing: 0.2px;
+            position: relative;
+            overflow: hidden;
         }
 
         .caixa-alternativas button::before {
-            content: "▹";
+            content: "◈";
             color: var(--cor-destaque);
-            font-size: 1.3rem;
-            opacity: 0.6;
-            transition: all 0.2s ease;
+            font-size: 1.2rem;
+            opacity: 0.5;
+            transition: all 0.3s ease;
+            text-shadow: 0 0 20px rgba(255, 45, 158, 0.2);
+        }
+
+        /* animação de brilho nas bordas */
+        .caixa-alternativas button::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 40%, rgba(255, 45, 158, 0.05) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
         }
 
         .caixa-alternativas button:hover {
-            background-color: var(--cor-destaque);
-            color: var(--cor-principal);
+            background: linear-gradient(145deg, var(--cor-destaque), #ff1493);
+            color: #0c0114;
             border-color: var(--cor-destaque);
-            transform: scale(1.02) translateY(-2px);
-            box-shadow: 0 12px 24px -8px rgba(43, 222, 253, 0.25);
+            transform: scale(1.02) translateY(-3px);
+            box-shadow: 
+                0 0 30px rgba(255, 45, 158, 0.3),
+                0 0 60px rgba(255, 45, 158, 0.1),
+                inset 0 0 30px rgba(255, 255, 255, 0.1);
         }
 
         .caixa-alternativas button:hover::before {
             opacity: 1;
-            color: var(--cor-principal);
-            transform: translateX(4px);
+            color: #0c0114;
+            transform: rotate(90deg) scale(1.1);
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+        }
+
+        .caixa-alternativas button:hover::after {
+            opacity: 1;
         }
 
         .caixa-alternativas button:active {
-            transform: scale(0.97);
+            transform: scale(0.96);
             transition: 0.05s;
         }
 
         /* ===== RESULTADO ===== */
         .caixa-resultado {
             margin-top: 1.8rem;
-            padding: 1.5rem 1.8rem;
-            border-radius: 1.8rem;
-            background: linear-gradient(145deg, rgba(11, 13, 32, 0.8), rgba(20, 24, 51, 0.6));
-            border: 1px solid rgba(43, 222, 253, 0.1);
-            backdrop-filter: blur(4px);
+            padding: 1.8rem 2rem;
+            border-radius: 2rem;
+            background: linear-gradient(145deg, rgba(26, 11, 31, 0.9), rgba(45, 18, 41, 0.7));
+            border: 1px solid rgba(255, 45, 158, 0.2);
+            backdrop-filter: blur(8px);
             display: none;
-            /* escondido até o fim */
+            position: relative;
+            overflow: hidden;
+            animation: resultadoAparecer 0.8s ease forwards;
+        }
+
+        .caixa-resultado::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 2rem;
+            padding: 2px;
+            background: conic-gradient(from 0deg, transparent, rgba(255, 45, 158, 0.2), transparent, rgba(255, 107, 203, 0.2), transparent);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            animation: bordaGirando 6s infinite linear;
+            pointer-events: none;
+        }
+
+        @keyframes bordaGirando {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes resultadoAparecer {
+            0% { opacity: 0; transform: translateY(25px) scale(0.96); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
         }
 
         .caixa-resultado.visivel {
             display: block;
-            animation: fadeUp 0.6s ease forwards;
         }
 
         .texto-resultado {
             font-size: 1.15rem;
-            line-height: 1.7;
-            color: #e6f7ff;
+            line-height: 1.8;
+            color: #fce4f0;
             text-align: left;
             padding: 0.2rem 0.2rem;
             border-left: 3px solid var(--cor-destaque);
-            padding-left: 1.2rem;
+            padding-left: 1.4rem;
             font-weight: 400;
+            text-shadow: 0 0 20px rgba(255, 45, 158, 0.05);
+            position: relative;
+            z-index: 1;
         }
 
         .texto-resultado::before {
-            content: "🧠 ";
+            content: "✦ ";
             font-size: 1.4rem;
             opacity: 0.7;
             margin-right: 8px;
+            color: var(--cor-destaque);
+            animation: estrelaGirar 8s infinite linear;
+            display: inline-block;
         }
 
-        /* ===== CONTADOR / PROGRESSO ===== */
+        /* ===== PROGRESSO ===== */
         .progresso {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 0.8rem;
             font-size: 0.85rem;
-            opacity: 0.5;
-            letter-spacing: 0.5px;
+            opacity: 0.6;
+            letter-spacing: 0.6px;
             padding: 0 0.2rem;
+            color: var(--cor-glow);
         }
 
         .progresso span {
             background: var(--cor-card);
-            padding: 0.2rem 1rem;
+            padding: 0.2rem 1.2rem;
             border-radius: 30px;
-            border: 1px solid rgba(43, 222, 253, 0.08);
+            border: 1px solid rgba(255, 45, 158, 0.1);
+            box-shadow: 0 0 15px rgba(255, 45, 158, 0.03);
         }
 
         .barra-progresso {
             width: 100%;
-            height: 4px;
+            height: 5px;
             background: var(--cor-card);
             border-radius: 10px;
             margin-top: 0.5rem;
             overflow: hidden;
+            box-shadow: inset 0 0 10px rgba(255, 45, 158, 0.05);
         }
 
         .barra-progresso .preenchimento {
             height: 100%;
             width: 0%;
-            background: linear-gradient(90deg, var(--cor-destaque), #6ae0ff);
+            background: linear-gradient(90deg, var(--cor-destaque), var(--cor-glow), var(--cor-destaque));
+            background-size: 200% 100%;
             border-radius: 10px;
-            transition: width 0.5s ease;
+            transition: width 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            animation: barraBrilho 2s infinite alternate ease-in-out;
+            box-shadow: 0 0 20px rgba(255, 45, 158, 0.3);
         }
 
-        /* ===== ANIMAÇÕES ===== */
+        @keyframes barraBrilho {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 0%; }
+        }
+
+        /* ===== BOTÃO REINICIAR ===== */
+        .btn-reiniciar {
+            margin-top: 1.8rem;
+            background: transparent;
+            border: 1px solid rgba(255, 45, 158, 0.25);
+            color: var(--cor-texto);
+            padding: 0.8rem 2.2rem;
+            border-radius: 50px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            letter-spacing: 1px;
+            opacity: 0.6;
+            display: none;
+            position: relative;
+            overflow: hidden;
+            text-shadow: 0 0 20px rgba(255, 45, 158, 0.1);
+        }
+
+        .btn-reiniciar::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 50px;
+            padding: 2px;
+            background: conic-gradient(from 0deg, transparent, rgba(255, 45, 158, 0.2), transparent, rgba(255, 107, 203, 0.2), transparent);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            animation: bordaGirando 6s infinite linear;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .btn-reiniciar:hover {
+            background: var(--cor-destaque);
+            color: #0c0114;
+            border-color: var(--cor-destaque);
+            opacity: 1;
+            transform: scale(1.04);
+            box-shadow: 0 0 40px rgba(255, 45, 158, 0.25);
+        }
+
+        .btn-reiniciar:hover::before {
+            opacity: 1;
+        }
+
+        .btn-reiniciar.visivel {
+            display: inline-block;
+            animation: fadeUp 0.6s ease forwards;
+        }
+
         @keyframes fadeUp {
-            0% {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            0% { opacity: 0; transform: translateY(20px) scale(0.95); }
+            100% { opacity: 0.7; transform: translateY(0) scale(1); }
         }
-
-        .fade-in {
-            animation: fadeUp 0.4s ease forwards;
-        }
+        .btn-reiniciar.visivel:hover { opacity: 1; }
 
         /* ===== RESPONSIVO ===== */
-        @media (max-width: 550px) {
+        @media (max-width: 600px) {
             .caixa-principal {
                 padding: 1.5rem 1.2rem 2rem;
-                border-radius: 1.8rem;
+                border-radius: 2rem;
             }
-
-            h1 {
-                font-size: 1.7rem;
-            }
-            h1 small {
-                font-size: 0.8rem;
-            }
-
+            h1 { font-size: 1.8rem; }
+            h1 small { font-size: 0.8rem; }
             .caixa-perguntas {
                 font-size: 1.05rem;
                 padding: 1.2rem 1rem;
                 min-height: 80px;
             }
-
             .caixa-alternativas button {
                 font-size: 0.95rem;
                 padding: 0.9rem 1.2rem;
             }
-
-            .texto-resultado {
-                font-size: 1rem;
-                padding-left: 0.8rem;
-            }
-
-            .caixa-resultado {
-                padding: 1rem 1.2rem;
-            }
+            .texto-resultado { font-size: 1rem; padding-left: 0.8rem; }
+            .caixa-resultado { padding: 1rem 1.2rem; }
         }
 
         @media (max-width: 400px) {
-            .caixa-principal {
-                padding: 1rem 0.8rem 1.5rem;
-            }
-            .caixa-perguntas {
-                font-size: 0.95rem;
-                padding: 0.8rem;
-            }
-            .caixa-alternativas button {
-                font-size: 0.85rem;
-                padding: 0.7rem 1rem;
-            }
-        }
-
-        /* ===== BOTÃO REINICIAR (estilo extra) ===== */
-        .btn-reiniciar {
-            margin-top: 1.5rem;
-            background: transparent;
-            border: 1px solid rgba(43, 222, 253, 0.2);
-            color: var(--cor-texto);
-            padding: 0.7rem 1.8rem;
-            border-radius: 40px;
-            font-weight: 500;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.25s;
-            letter-spacing: 0.5px;
-            opacity: 0.7;
-            display: none;
-            /* aparece só no fim */
-        }
-
-        .btn-reiniciar:hover {
-            background: var(--cor-destaque);
-            color: var(--cor-principal);
-            border-color: var(--cor-destaque);
-            opacity: 1;
-            transform: scale(1.02);
-        }
-
-        .btn-reiniciar.visivel {
-            display: inline-block;
-            animation: fadeUp 0.5s ease forwards;
+            .caixa-principal { padding: 1rem 0.8rem 1.5rem; }
+            .caixa-perguntas { font-size: 0.95rem; padding: 0.8rem; }
+            .caixa-alternativas button { font-size: 0.85rem; padding: 0.7rem 1rem; }
         }
     </style>
 </head>
@@ -339,15 +466,15 @@
 
     <div class="caixa-principal" role="main">
         <h1>
-            🤖 Futuro da IA
-            <small>• jornada</small>
+            ✦ Futuro da IA
+            <small>• neon rose</small>
         </h1>
-        <div class="subtitulo">O que você pensa sobre o amanhã?</div>
+        <div class="subtitulo">✦  escolhas que desenham o amanhã  ✦</div>
 
-        <!-- indicador de progresso -->
+        <!-- progresso -->
         <div class="progresso">
-            <span id="passoAtual">1 / 3</span>
-            <span id="rotuloProgresso">perguntas</span>
+            <span id="passoAtual">1 / 5</span>
+            <span id="rotuloProgresso">jornada</span>
         </div>
         <div class="barra-progresso">
             <div class="preenchimento" id="barraPreenchimento" style="width: 0%;"></div>
@@ -357,20 +484,20 @@
         <div class="caixa-perguntas" id="caixaPerguntas">Carregando...</div>
         <div class="caixa-alternativas" id="caixaAlternativas"></div>
 
-        <!-- resultado (inicialmente oculto) -->
+        <!-- resultado -->
         <div class="caixa-resultado" id="caixaResultado">
             <p class="texto-resultado" id="textoResultado"></p>
         </div>
 
-        <!-- botão reiniciar -->
-        <button class="btn-reiniciar" id="btnReiniciar">↻  recomeçar jornada</button>
+        <!-- reiniciar -->
+        <button class="btn-reiniciar" id="btnReiniciar">⟳  recomeçar jornada</button>
     </div>
 
     <script>
         (function() {
             "use strict";
 
-            // ===== ELEMENTOS DOM =====
+            // ===== ELEMENTOS =====
             const caixaPerguntas = document.getElementById('caixaPerguntas');
             const caixaAlternativas = document.getElementById('caixaAlternativas');
             const caixaResultado = document.getElementById('caixaResultado');
@@ -379,23 +506,23 @@
             const passoAtual = document.getElementById('passoAtual');
             const barraPreenchimento = document.getElementById('barraPreenchimento');
 
-            // ===== BASE DE PERGUNTAS (expandida com foco no futuro da IA) =====
+            // ===== PERGUNTAS (foco no futuro da IA) =====
             const perguntas = [{
                 enunciado: "A IA generativa (como ChatGPT, Midjourney) está transformando a criatividade. Você acredita que ela deve ser usada sem restrições em escolas e universidades?",
                 alternativas: [{
-                    texto: "Sim, desde que com supervisão e ética. A IA pode potencializar o aprendizado e a criatividade dos alunos.",
+                    texto: "Sim, desde que com supervisão e ética. A IA pode potencializar o aprendizado e a criatividade.",
                     afirmacao: "A IA generativa, quando usada com responsabilidade e mediação, é uma ferramenta poderosa para a educação, estimulando o pensamento crítico e a inovação. O futuro da IA na educação é colaborativo."
                 }, {
                     texto: "Não, pois pode incentivar a preguiça intelectual e a desonestidade acadêmica.",
                     afirmacao: "É importante estabelecer limites claros para o uso da IA em ambientes acadêmicos, para que ela não substitua o esforço cognitivo e a originalidade. A regulação e a conscientização são essenciais."
                 }]
             }, {
-                enunciado: "Com a automação de empregos por IA, muitas profissões podem desaparecer. Qual caminho você acha mais promissor para a sociedade?",
+                enunciado: "Com a automação de empregos por IA, muitas profissões podem desaparecer. Qual caminho você acha mais promissor?",
                 alternativas: [{
-                    texto: "Investir em requalificação profissional e em novas áreas que a IA vai criar, como curadoria de dados e ética em algoritmos.",
+                    texto: "Investir em requalificação profissional e em novas áreas que a IA vai criar.",
                     afirmacao: "O futuro do trabalho com IA exige adaptação. A requalificação e o foco em habilidades humanas (empatia, criatividade, ética) serão os pilares para uma transição justa e próspera."
                 }, {
-                    texto: "Desacelerar o avanço da IA para proteger os empregos atuais, mesmo que isso limite o progresso tecnológico.",
+                    texto: "Desacelerar o avanço da IA para proteger os empregos atuais, mesmo que isso limite o progresso.",
                     afirmacao: "Embora a proteção do emprego seja uma preocupação legítima, frear a inovação pode atrasar benefícios em saúde, ciência e qualidade de vida. O equilíbrio entre regulação e avanço é o grande desafio."
                 }]
             }, {
@@ -413,7 +540,7 @@
                     texto: "Criar leis e políticas públicas que garantam acesso democrático à IA e evitem discriminação algorítmica.",
                     afirmacao: "A governança da IA é urgente. Políticas inclusivas, auditoria de algoritmos e diversidade nas equipes de desenvolvimento são passos essenciais para uma IA que sirva a todos."
                 }, {
-                    texto: "Deixar o mercado livre, pois a inovação resolva os problemas por si só.",
+                    texto: "Deixar o mercado livre, pois a inovação resolve os problemas por si só.",
                     afirmacao: "Historicamente, o mercado nem sempre corrige desigualdades. A IA exige intervenção proativa para evitar que se torne mais uma ferramenta de exclusão."
                 }]
             }, {
@@ -432,7 +559,7 @@
             let historiaFinal = "";
             const totalPerguntas = perguntas.length;
 
-            // ===== FUNÇÕES PRINCIPAIS =====
+            // ===== FUNÇÕES =====
             function atualizarProgresso() {
                 const progresso = Math.min((atual / totalPerguntas) * 100, 100);
                 barraPreenchimento.style.width = progresso + '%';
@@ -440,7 +567,6 @@
             }
 
             function mostrarPergunta() {
-                // Se já respondemos todas, mostra resultado
                 if (atual >= totalPerguntas) {
                     mostrarResultado();
                     return;
@@ -454,12 +580,10 @@
                 btnReiniciar.classList.remove('visivel');
                 btnReiniciar.style.display = 'none';
 
-                // Monta botões
-                perguntaAtual.alternativas.forEach((alternativa, index) => {
+                perguntaAtual.alternativas.forEach((alternativa) => {
                     const botao = document.createElement('button');
                     botao.textContent = alternativa.texto;
-                    botao.setAttribute('data-index', index);
-                    botao.addEventListener('click', function(e) {
+                    botao.addEventListener('click', function() {
                         respostaSelecionada(alternativa);
                     });
                     caixaAlternativas.appendChild(botao);
@@ -469,33 +593,25 @@
             }
 
             function respostaSelecionada(opcao) {
-                // Adiciona a afirmação à história
                 historiaFinal += opcao.afirmacao + ' ';
-
-                // Avança para a próxima pergunta
                 atual++;
                 mostrarPergunta();
             }
 
             function mostrarResultado() {
-                // Esconde alternativas e pergunta, mostra resultado
-                caixaPerguntas.textContent = '🧩 Sua visão sobre o futuro da IA';
+                caixaPerguntas.textContent = '✦  Sua visão sobre o futuro da IA  ✦';
                 caixaAlternativas.innerHTML = '';
                 caixaResultado.style.display = 'block';
                 caixaResultado.classList.add('visivel');
                 textoResultado.textContent = historiaFinal.trim() || 'Você explorou diferentes perspectivas sobre a IA. Cada escolha molda o amanhã.';
 
-                // Exibe botão reiniciar
                 btnReiniciar.style.display = 'inline-block';
                 btnReiniciar.classList.add('visivel');
-
-                // Barra 100%
                 barraPreenchimento.style.width = '100%';
                 passoAtual.textContent = `${totalPerguntas} / ${totalPerguntas}`;
             }
 
             function reiniciarJornada() {
-                // Reseta estado
                 atual = 0;
                 historiaFinal = '';
                 caixaResultado.classList.remove('visivel');
@@ -503,23 +619,16 @@
                 btnReiniciar.classList.remove('visivel');
                 btnReiniciar.style.display = 'none';
                 textoResultado.textContent = '';
-
-                // Volta para a primeira pergunta
                 mostrarPergunta();
-                // Scroll suave para o topo
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
 
             // ===== INICIALIZAÇÃO =====
             function init() {
-                // Adiciona evento ao botão reiniciar
                 btnReiniciar.addEventListener('click', reiniciarJornada);
-
-                // Inicia a primeira pergunta
                 mostrarPergunta();
             }
 
-            // Inicia quando o DOM estiver pronto
             if (document.readyState === 'loading') {
                 document.addEventListener('DOMContentLoaded', init);
             } else {
