@@ -3,18 +3,531 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Título do site</title>
+    <title>Futuro da IA – Jornada Interativa</title>
+    <style>
+        /* ===== RESET & VARIÁVEIS ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --cor-fundo: #01080E;
+            --cor-principal: #0B0D20;
+            --cor-secundaria: #212333;
+            --cor-destaque: #2BDEFD;
+            --cor-texto: #D7F9FF;
+            --cor-card: #141833;
+            --borda-glow: rgba(43, 222, 253, 0.2);
+            --fonte: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
+            font-family: var(--fonte);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 1.5rem;
+            background-image: radial-gradient(circle at 20% 30%, rgba(43, 222, 253, 0.03) 0%, transparent 60%);
+        }
+
+        /* ===== CARD PRINCIPAL ===== */
+        .caixa-principal {
+            background-color: var(--cor-principal);
+            width: 100%;
+            max-width: 720px;
+            padding: 2rem 2rem 2.5rem;
+            border-radius: 2.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(43, 222, 253, 0.1);
+            backdrop-filter: blur(2px);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(43, 222, 253, 0.08);
+        }
+
+        .caixa-principal:hover {
+            border-color: rgba(43, 222, 253, 0.2);
+            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(43, 222, 253, 0.15);
+        }
+
+        /* ===== TÍTULO ===== */
+        h1 {
+            color: var(--cor-destaque);
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 30px rgba(43, 222, 253, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+        }
+
+        h1 small {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--cor-texto);
+            opacity: 0.6;
+            letter-spacing: 0.3px;
+        }
+
+        .subtitulo {
+            text-align: center;
+            font-size: 0.95rem;
+            opacity: 0.5;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid rgba(43, 222, 253, 0.08);
+            padding-bottom: 1rem;
+            letter-spacing: 0.3px;
+        }
+
+        /* ===== PERGUNTA ===== */
+        .caixa-perguntas {
+            background-color: var(--cor-card);
+            padding: 1.8rem 1.5rem;
+            border-radius: 1.8rem;
+            margin-bottom: 2rem;
+            font-size: 1.3rem;
+            line-height: 1.6;
+            font-weight: 500;
+            border: 1px solid rgba(43, 222, 253, 0.06);
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3);
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #f0fcff;
+            transition: all 0.25s ease;
+        }
+
+        .caixa-perguntas::before {
+            content: "❓ ";
+            font-size: 1.6rem;
+            opacity: 0.4;
+            margin-right: 10px;
+        }
+
+        /* ===== ALTERNATIVAS ===== */
+        .caixa-alternativas {
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+            margin: 1.8rem 0 2rem;
+        }
+
+        .caixa-alternativas button {
+            background-color: var(--cor-secundaria);
+            color: var(--cor-texto);
+            border: 1px solid rgba(43, 222, 253, 0.08);
+            border-radius: 1.2rem;
+            padding: 1.1rem 1.5rem;
+            font-size: 1.05rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            line-height: 1.4;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            letter-spacing: 0.2px;
+        }
+
+        .caixa-alternativas button::before {
+            content: "▹";
+            color: var(--cor-destaque);
+            font-size: 1.3rem;
+            opacity: 0.6;
+            transition: all 0.2s ease;
+        }
+
+        .caixa-alternativas button:hover {
+            background-color: var(--cor-destaque);
+            color: var(--cor-principal);
+            border-color: var(--cor-destaque);
+            transform: scale(1.02) translateY(-2px);
+            box-shadow: 0 12px 24px -8px rgba(43, 222, 253, 0.25);
+        }
+
+        .caixa-alternativas button:hover::before {
+            opacity: 1;
+            color: var(--cor-principal);
+            transform: translateX(4px);
+        }
+
+        .caixa-alternativas button:active {
+            transform: scale(0.97);
+            transition: 0.05s;
+        }
+
+        /* ===== RESULTADO ===== */
+        .caixa-resultado {
+            margin-top: 1.8rem;
+            padding: 1.5rem 1.8rem;
+            border-radius: 1.8rem;
+            background: linear-gradient(145deg, rgba(11, 13, 32, 0.8), rgba(20, 24, 51, 0.6));
+            border: 1px solid rgba(43, 222, 253, 0.1);
+            backdrop-filter: blur(4px);
+            display: none;
+            /* escondido até o fim */
+        }
+
+        .caixa-resultado.visivel {
+            display: block;
+            animation: fadeUp 0.6s ease forwards;
+        }
+
+        .texto-resultado {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            color: #e6f7ff;
+            text-align: left;
+            padding: 0.2rem 0.2rem;
+            border-left: 3px solid var(--cor-destaque);
+            padding-left: 1.2rem;
+            font-weight: 400;
+        }
+
+        .texto-resultado::before {
+            content: "🧠 ";
+            font-size: 1.4rem;
+            opacity: 0.7;
+            margin-right: 8px;
+        }
+
+        /* ===== CONTADOR / PROGRESSO ===== */
+        .progresso {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.8rem;
+            font-size: 0.85rem;
+            opacity: 0.5;
+            letter-spacing: 0.5px;
+            padding: 0 0.2rem;
+        }
+
+        .progresso span {
+            background: var(--cor-card);
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+            border: 1px solid rgba(43, 222, 253, 0.08);
+        }
+
+        .barra-progresso {
+            width: 100%;
+            height: 4px;
+            background: var(--cor-card);
+            border-radius: 10px;
+            margin-top: 0.5rem;
+            overflow: hidden;
+        }
+
+        .barra-progresso .preenchimento {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--cor-destaque), #6ae0ff);
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        /* ===== ANIMAÇÕES ===== */
+        @keyframes fadeUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeUp 0.4s ease forwards;
+        }
+
+        /* ===== RESPONSIVO ===== */
+        @media (max-width: 550px) {
+            .caixa-principal {
+                padding: 1.5rem 1.2rem 2rem;
+                border-radius: 1.8rem;
+            }
+
+            h1 {
+                font-size: 1.7rem;
+            }
+            h1 small {
+                font-size: 0.8rem;
+            }
+
+            .caixa-perguntas {
+                font-size: 1.05rem;
+                padding: 1.2rem 1rem;
+                min-height: 80px;
+            }
+
+            .caixa-alternativas button {
+                font-size: 0.95rem;
+                padding: 0.9rem 1.2rem;
+            }
+
+            .texto-resultado {
+                font-size: 1rem;
+                padding-left: 0.8rem;
+            }
+
+            .caixa-resultado {
+                padding: 1rem 1.2rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .caixa-principal {
+                padding: 1rem 0.8rem 1.5rem;
+            }
+            .caixa-perguntas {
+                font-size: 0.95rem;
+                padding: 0.8rem;
+            }
+            .caixa-alternativas button {
+                font-size: 0.85rem;
+                padding: 0.7rem 1rem;
+            }
+        }
+
+        /* ===== BOTÃO REINICIAR (estilo extra) ===== */
+        .btn-reiniciar {
+            margin-top: 1.5rem;
+            background: transparent;
+            border: 1px solid rgba(43, 222, 253, 0.2);
+            color: var(--cor-texto);
+            padding: 0.7rem 1.8rem;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.25s;
+            letter-spacing: 0.5px;
+            opacity: 0.7;
+            display: none;
+            /* aparece só no fim */
+        }
+
+        .btn-reiniciar:hover {
+            background: var(--cor-destaque);
+            color: var(--cor-principal);
+            border-color: var(--cor-destaque);
+            opacity: 1;
+            transform: scale(1.02);
+        }
+
+        .btn-reiniciar.visivel {
+            display: inline-block;
+            animation: fadeUp 0.5s ease forwards;
+        }
+    </style>
 </head>
 <body>
-    <div class="caixa-principal">
-        <h1>Adicione o título</h1>
-        <div class="caixa-perguntas"></div>
-        <div class="caixa-alternativas"></div>
-        <div class="caixa-resultado">
-            <p class="texto-resultado"></p>
+
+    <div class="caixa-principal" role="main">
+        <h1>
+            🤖 Futuro da IA
+            <small>• jornada</small>
+        </h1>
+        <div class="subtitulo">O que você pensa sobre o amanhã?</div>
+
+        <!-- indicador de progresso -->
+        <div class="progresso">
+            <span id="passoAtual">1 / 3</span>
+            <span id="rotuloProgresso">perguntas</span>
         </div>
+        <div class="barra-progresso">
+            <div class="preenchimento" id="barraPreenchimento" style="width: 0%;"></div>
+        </div>
+
+        <!-- perguntas e alternativas -->
+        <div class="caixa-perguntas" id="caixaPerguntas">Carregando...</div>
+        <div class="caixa-alternativas" id="caixaAlternativas"></div>
+
+        <!-- resultado (inicialmente oculto) -->
+        <div class="caixa-resultado" id="caixaResultado">
+            <p class="texto-resultado" id="textoResultado"></p>
+        </div>
+
+        <!-- botão reiniciar -->
+        <button class="btn-reiniciar" id="btnReiniciar">↻  recomeçar jornada</button>
     </div>
-    <script src="script.js"></script>
+
+    <script>
+        (function() {
+            "use strict";
+
+            // ===== ELEMENTOS DOM =====
+            const caixaPerguntas = document.getElementById('caixaPerguntas');
+            const caixaAlternativas = document.getElementById('caixaAlternativas');
+            const caixaResultado = document.getElementById('caixaResultado');
+            const textoResultado = document.getElementById('textoResultado');
+            const btnReiniciar = document.getElementById('btnReiniciar');
+            const passoAtual = document.getElementById('passoAtual');
+            const barraPreenchimento = document.getElementById('barraPreenchimento');
+
+            // ===== BASE DE PERGUNTAS (expandida com foco no futuro da IA) =====
+            const perguntas = [{
+                enunciado: "A IA generativa (como ChatGPT, Midjourney) está transformando a criatividade. Você acredita que ela deve ser usada sem restrições em escolas e universidades?",
+                alternativas: [{
+                    texto: "Sim, desde que com supervisão e ética. A IA pode potencializar o aprendizado e a criatividade dos alunos.",
+                    afirmacao: "A IA generativa, quando usada com responsabilidade e mediação, é uma ferramenta poderosa para a educação, estimulando o pensamento crítico e a inovação. O futuro da IA na educação é colaborativo."
+                }, {
+                    texto: "Não, pois pode incentivar a preguiça intelectual e a desonestidade acadêmica.",
+                    afirmacao: "É importante estabelecer limites claros para o uso da IA em ambientes acadêmicos, para que ela não substitua o esforço cognitivo e a originalidade. A regulação e a conscientização são essenciais."
+                }]
+            }, {
+                enunciado: "Com a automação de empregos por IA, muitas profissões podem desaparecer. Qual caminho você acha mais promissor para a sociedade?",
+                alternativas: [{
+                    texto: "Investir em requalificação profissional e em novas áreas que a IA vai criar, como curadoria de dados e ética em algoritmos.",
+                    afirmacao: "O futuro do trabalho com IA exige adaptação. A requalificação e o foco em habilidades humanas (empatia, criatividade, ética) serão os pilares para uma transição justa e próspera."
+                }, {
+                    texto: "Desacelerar o avanço da IA para proteger os empregos atuais, mesmo que isso limite o progresso tecnológico.",
+                    afirmacao: "Embora a proteção do emprego seja uma preocupação legítima, frear a inovação pode atrasar benefícios em saúde, ciência e qualidade de vida. O equilíbrio entre regulação e avanço é o grande desafio."
+                }]
+            }, {
+                enunciado: "A IA pode tomar decisões críticas (como diagnósticos médicos ou sentenças judiciais). Até que ponto devemos confiar nela?",
+                alternativas: [{
+                    texto: "Devemos usar a IA como apoio, mas a decisão final deve ser sempre humana, com supervisão rigorosa.",
+                    afirmacao: "A IA é uma ferramenta de apoio, não um substituto para o julgamento humano. A transparência, a explicabilidade e a supervisão são fundamentais para uma IA confiável e ética."
+                }, {
+                    texto: "Se a IA for mais precisa que humanos, devemos deixá-la decidir sozinha em muitos casos.",
+                    afirmacao: "A precisão da IA é atraente, mas questões como viés, responsabilidade e empatia exigem supervisão humana. O futuro ideal é uma simbiose entre IA e inteligência humana."
+                }]
+            }, {
+                enunciado: "A IA pode amplificar desigualdades sociais se não for bem regulada. Como você acha que devemos agir?",
+                alternativas: [{
+                    texto: "Criar leis e políticas públicas que garantam acesso democrático à IA e evitem discriminação algorítmica.",
+                    afirmacao: "A governança da IA é urgente. Políticas inclusivas, auditoria de algoritmos e diversidade nas equipes de desenvolvimento são passos essenciais para uma IA que sirva a todos."
+                }, {
+                    texto: "Deixar o mercado livre, pois a inovação resolva os problemas por si só.",
+                    afirmacao: "Historicamente, o mercado nem sempre corrige desigualdades. A IA exige intervenção proativa para evitar que se torne mais uma ferramenta de exclusão."
+                }]
+            }, {
+                enunciado: "Se a IA atingir uma 'consciência' ou superinteligência, qual deveria ser nossa postura?",
+                alternativas: [{
+                    texto: "Devemos estabelecer princípios éticos globais e mecanismos de controle antes que isso aconteça.",
+                    afirmacao: "A preparação para uma IA avançada é uma responsabilidade coletiva. Princípios como transparência, beneficência e não-maleficência devem guiar o desenvolvimento."
+                }, {
+                    texto: "Acompanhar os acontecimentos e reagir conforme a tecnologia evolui, sem alarmismo.",
+                    afirmacao: "Embora o alarmismo seja contraproducente, a inércia pode ser perigosa. É melhor agir preventivamente do que remediar crises futuras."
+                }]
+            }];
+
+            // ===== ESTADO =====
+            let atual = 0;
+            let historiaFinal = "";
+            const totalPerguntas = perguntas.length;
+
+            // ===== FUNÇÕES PRINCIPAIS =====
+            function atualizarProgresso() {
+                const progresso = Math.min((atual / totalPerguntas) * 100, 100);
+                barraPreenchimento.style.width = progresso + '%';
+                passoAtual.textContent = `${Math.min(atual + 1, totalPerguntas)} / ${totalPerguntas}`;
+            }
+
+            function mostrarPergunta() {
+                // Se já respondemos todas, mostra resultado
+                if (atual >= totalPerguntas) {
+                    mostrarResultado();
+                    return;
+                }
+
+                const perguntaAtual = perguntas[atual];
+                caixaPerguntas.textContent = perguntaAtual.enunciado;
+                caixaAlternativas.innerHTML = '';
+                caixaResultado.classList.remove('visivel');
+                caixaResultado.style.display = 'none';
+                btnReiniciar.classList.remove('visivel');
+                btnReiniciar.style.display = 'none';
+
+                // Monta botões
+                perguntaAtual.alternativas.forEach((alternativa, index) => {
+                    const botao = document.createElement('button');
+                    botao.textContent = alternativa.texto;
+                    botao.setAttribute('data-index', index);
+                    botao.addEventListener('click', function(e) {
+                        respostaSelecionada(alternativa);
+                    });
+                    caixaAlternativas.appendChild(botao);
+                });
+
+                atualizarProgresso();
+            }
+
+            function respostaSelecionada(opcao) {
+                // Adiciona a afirmação à história
+                historiaFinal += opcao.afirmacao + ' ';
+
+                // Avança para a próxima pergunta
+                atual++;
+                mostrarPergunta();
+            }
+
+            function mostrarResultado() {
+                // Esconde alternativas e pergunta, mostra resultado
+                caixaPerguntas.textContent = '🧩 Sua visão sobre o futuro da IA';
+                caixaAlternativas.innerHTML = '';
+                caixaResultado.style.display = 'block';
+                caixaResultado.classList.add('visivel');
+                textoResultado.textContent = historiaFinal.trim() || 'Você explorou diferentes perspectivas sobre a IA. Cada escolha molda o amanhã.';
+
+                // Exibe botão reiniciar
+                btnReiniciar.style.display = 'inline-block';
+                btnReiniciar.classList.add('visivel');
+
+                // Barra 100%
+                barraPreenchimento.style.width = '100%';
+                passoAtual.textContent = `${totalPerguntas} / ${totalPerguntas}`;
+            }
+
+            function reiniciarJornada() {
+                // Reseta estado
+                atual = 0;
+                historiaFinal = '';
+                caixaResultado.classList.remove('visivel');
+                caixaResultado.style.display = 'none';
+                btnReiniciar.classList.remove('visivel');
+                btnReiniciar.style.display = 'none';
+                textoResultado.textContent = '';
+
+                // Volta para a primeira pergunta
+                mostrarPergunta();
+                // Scroll suave para o topo
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            // ===== INICIALIZAÇÃO =====
+            function init() {
+                // Adiciona evento ao botão reiniciar
+                btnReiniciar.addEventListener('click', reiniciarJornada);
+
+                // Inicia a primeira pergunta
+                mostrarPergunta();
+            }
+
+            // Inicia quando o DOM estiver pronto
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', init);
+            } else {
+                init();
+            }
+
+        })();
+    </script>
+
 </body>
 </html>
